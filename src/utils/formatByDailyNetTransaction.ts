@@ -1,4 +1,4 @@
-interface DailyNetTransaction {
+export interface DailyNetTransaction {
   [key: string]: number;
 }
 
@@ -7,6 +7,7 @@ interface Transaction {
   date: string;
   amount: number;
 }
+
 export const formatByDailyNetTransaction = (transactions: Transaction[]) => {
   return transactions.reduce<DailyNetTransaction>((acc, curr) => {
     if (acc[curr.date]) {
