@@ -45,19 +45,22 @@ const Cells: React.FC<CellsProp> = ({ startDate, endDate, dailyNetTransactions }
         const dayInString = format(day, 'yyyy-MM-dd');
         const val = dailyNetTransactions[dayInString];
         
-        const color: 'red' | 'green' = val < 0 ? 'red' : 'green';
+        if(!val) {
+            cells.push(<li key={dayInString} />);
+        } else {
+            const color: 'red' | 'green' = val < 0 ? 'red' : 'green';
         
-        const level = getTransactionLevel(val,  val < 0 ? minValue : maxValue);
-
-        cells.push(
-            <li 
-                key={dayInString} 
-                style={{
-                    backgroundColor: colors[color][level],
-                }}
-            />
-        );
-
+            const level = getTransactionLevel(val,  val < 0 ? minValue : maxValue);
+    
+            cells.push(
+                <li 
+                    key={dayInString} 
+                    style={{
+                        backgroundColor: colors[color][level],
+                    }}
+                />
+            );
+        }
         day = addDays(day, 1);
     }
 
